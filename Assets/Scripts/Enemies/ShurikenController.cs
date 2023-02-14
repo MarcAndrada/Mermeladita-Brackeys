@@ -22,6 +22,8 @@ public class ShurikenController : MonoBehaviour
     }
 
     // Update is called once per frame
+   
+    //Movimiento del shuriken, Vector * alfa * deltatime (Para que los shuriken vayan a la misma velocidad en todos los pc)
     void Update()
     {
         rb2d.position += (Vector2)transform.right * velocity * Time.deltaTime;
@@ -30,8 +32,8 @@ public class ShurikenController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Si el shuriken choca contra el player, se rompe y el player muere
         if (collision.CompareTag("Player")){
-            Debug.Log("He chocado");
             //collision.GetComponent<testPlayerController>().die();
             testPlayerController player = collision.GetComponent<testPlayerController>();
             player.die();
