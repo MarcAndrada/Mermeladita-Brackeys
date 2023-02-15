@@ -46,55 +46,49 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //_anim.SetBool("Stop", false);
+        if (startDir == 0)
+        {
+            _rb.velocity = new Vector2(_velocity, _rb.velocity.y);
+            _sp.flipX = true;
+        }
+
+        else if (startDir == 1)
+        {
+            _sp.flipX = false;
+            _rb.velocity = new Vector2(-_velocity, _rb.velocity.y);
+        }
+
         RaycastHit2D groundChecker;
         RaycastHit2D groundChecker2;
+        RaycastHit2D hit;
+
+        hit = Physics2D.Raycast(viewPoint.position, Vector2.right, length, WallsLayer);
         groundChecker = Physics2D.Raycast(groundCheckerPos[0].position, Vector2.down, lenghtGroundChecker, WallsLayer);
         groundChecker2 = Physics2D.Raycast(groundCheckerPos[1].position, Vector2.down, lenghtGroundChecker, WallsLayer);
-        if (groundChecker.collider == null || groundChecker2.collider == null)
+
+        if (hit.collider != null && startDir == 0 && startCoolDown == false || groundChecker2.collider == null)
         {
-            _rb.velocity = new Vector3(0, 0, 0);
-            // DISPARAR
+            _sp.flipX = false;
+            startDir = 1;
+            startCoolDown = true;
         }
-        else
+
+        else if (hit.collider != null && startDir == 1 && startCoolDown == false || groundChecker.collider == null)
         {
-            //_anim.SetBool("Stop", false);
-            if (startDir == 0)
-            {
-                _rb.velocity = new Vector2(_velocity, _rb.velocity.y);
-                _sp.flipX = true;
-            }
+            _sp.flipX = true;
+            startDir = 0;
+            startCoolDown = true;
+        }
 
-            else if (startDir == 1)
-            {
-                _sp.flipX = false;
-                _rb.velocity = new Vector2(-_velocity, _rb.velocity.y);
-            }
+        if (startCoolDown == true)
+        {
+            coolDownTurn--;
 
-            RaycastHit2D hit;
-            hit = Physics2D.Raycast(viewPoint.position, Vector2.right, length, WallsLayer);
-            if (hit.collider != null && startDir == 1 && startCoolDown == false)
+            if (coolDownTurn <= 0)
             {
-                _sp.flipX = true;
-                startDir = 0;
-                startCoolDown = true;
-            }
-
-            else if (hit.collider != null && startDir == 0 && startCoolDown == false)
-            {
-                _sp.flipX = false;
-                startDir = 1;
-                startCoolDown = true;
-            }
-
-            if (startCoolDown == true)
-            {
-                coolDownTurn--;
-
-                if (coolDownTurn <= 0)
-                {
-                    startCoolDown = false;
-                    coolDownTurn = 100;
-                }
+                startCoolDown = false;
+                coolDownTurn = 100;
             }
         }
     }
