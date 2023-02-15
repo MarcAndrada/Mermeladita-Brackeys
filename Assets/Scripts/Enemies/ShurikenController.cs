@@ -9,6 +9,8 @@ public class ShurikenController : MonoBehaviour
 
     private Rigidbody2D rb2d;
 
+    Vector2 direction;
+
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -18,7 +20,8 @@ public class ShurikenController : MonoBehaviour
     void Start()
     {
         //Velocidad y trayectoria
-        
+        direction = (EnemiesManager._instance._player.transform.position - transform.position).normalized;
+        Destroy(gameObject, 5);
     }
 
     // Update is called once per frame
@@ -26,7 +29,7 @@ public class ShurikenController : MonoBehaviour
     //Movimiento del shuriken, Vector * alfa * deltatime (Para que los shuriken vayan a la misma velocidad en todos los pc)
     void Update()
     {
-        rb2d.position += (Vector2)transform.right * velocity * Time.deltaTime;
+        rb2d.position += direction * velocity * Time.deltaTime;
 
         
     }
@@ -38,8 +41,10 @@ public class ShurikenController : MonoBehaviour
             testPlayerController player = collision.GetComponent<testPlayerController>();
             player.die();
             Destroy(gameObject);
-
         }
-
+        if (collision.CompareTag("Floor"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -32,6 +32,24 @@ public class testPlayerController : MonoBehaviour
         {
             Jump();
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var item in enemies)
+            {
+                item.GetComponent<EnemyController>().EnemyDie();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var item in enemies)
+            {
+                item.GetComponent<EnemyController>().EnemyRespawn();
+            }
+        }
     }
 
     private void Jump()
