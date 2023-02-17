@@ -101,10 +101,10 @@ MonoBehaviour:
     value: -30
   colorFilter:
     overrideState: 1
-    value: {r: 0.069419734, g: 0.078608036, b: 0.3773585, a: 1}
+    value: {r: 0.7830189, g: 0.025854412, b: 0.5208593, a: 1}
   hueShift:
     overrideState: 0
-    value: 4
+    value: 28
   saturation:
     overrideState: 1
     value: 87
@@ -1365,12 +1365,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a34fa72bd4185749832024e9c8010bf, type: 3}
   m_Name: ScreenSpaceReflections
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
   preset:
-    overrideState: 0
+    overrideState: 1
     value: 2
   maximumIterationCount:
     overrideState: 0
@@ -1382,11 +1382,11 @@ MonoBehaviour:
     overrideState: 0
     value: 8
   maximumMarchDistance:
-    overrideState: 0
+    overrideState: 1
     value: 100
   distanceFade:
-    overrideState: 0
+    overrideState: 1
     value: 0.5
   vignette:
-    overrideState: 0
+    overrideState: 1
     value: 0.5
