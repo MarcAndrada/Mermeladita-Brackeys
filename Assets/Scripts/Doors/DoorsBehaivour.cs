@@ -5,9 +5,9 @@ using UnityEngine;
 public class DoorsBehaivour : MonoBehaviour
 {
     
-    private enum DoorType { GREEN, RED, BLUE};
+    public enum ColorType { GREEN, RED, BLUE};
     [SerializeField]
-    DoorType type;
+    ColorType type;
     [SerializeField]
     private BoxCollider2D door;
     private Animator doorAnimator;
@@ -21,31 +21,43 @@ public class DoorsBehaivour : MonoBehaviour
     {
         switch (type)
         {
-            case DoorType.GREEN:
+            case ColorType.GREEN:
                 spriteRenderer.color = Color.green;
                 break;
-            case DoorType.RED:
+            case ColorType.RED:
                 spriteRenderer.color = Color.red;
                 break;
-            case DoorType.BLUE:
+            case ColorType.BLUE:
                 spriteRenderer.color = Color.blue;
                 break;
             default:
                 break;
         }
     }
-    private void CheckCanOpen()
+    private void CheckCanOpen(PlayerKeysController _playerKeys)
     {
         switch (type)
         {
-            case DoorType.GREEN:
-                
+            case ColorType.GREEN:
+                if (_playerKeys.keyGreen)
+                {
+                    DoorOpen();
+                    _playerKeys.keyGreen = false;
+                }
                 break;
-            case DoorType.RED:
-         
+            case ColorType.RED:
+                if (_playerKeys.keyRed)
+                {
+                    DoorOpen();
+                    _playerKeys.keyRed = false;
+                }
                 break;
-            case DoorType.BLUE:
-          
+            case ColorType.BLUE:
+                if (_playerKeys.keyBlue)
+                {
+                    DoorOpen();
+                    _playerKeys.keyBlue = false;
+                }
                 break;
             default:
                 break;
@@ -61,7 +73,7 @@ public class DoorsBehaivour : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            CheckCanOpen();
+            CheckCanOpen(collision.GetComponent<PlayerKeysController>());
         }
     }
 }
