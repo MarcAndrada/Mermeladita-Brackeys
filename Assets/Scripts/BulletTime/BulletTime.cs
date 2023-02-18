@@ -10,16 +10,21 @@ public class BulletTime : MonoBehaviour {
     private float startTimeScale;
     private float startFixedDeltaTime;
 
+    private float maxInBulletTime = 2f;
+    private float currentBulletTime; 
+
     [SerializeField] private PostProcessVolume postProcessing;
     [SerializeField] private TrailRenderer trailRenderer;
 
     private void Start() {
         startTimeScale = Time.timeScale;
         startFixedDeltaTime= Time.fixedDeltaTime;
+
+        currentBulletTime = maxInBulletTime;
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E) && maxInBulletTime > 0) {
             StartBulletTime();
         }
         if (Input.GetKeyUp(KeyCode.E)) {
@@ -28,6 +33,7 @@ public class BulletTime : MonoBehaviour {
     }
 
     public void StartBulletTime() {
+
         Time.timeScale = slowdownTime;
         Time.fixedDeltaTime = startFixedDeltaTime * slowdownTime;
 

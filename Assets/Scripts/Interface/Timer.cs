@@ -24,7 +24,6 @@ public class Timer : MonoBehaviour {
     private void UpdateTime(float seconds) {
         
         int currentTime = Mathf.FloorToInt(seconds % 60);
-
         timerText.text = currentTime.ToString();
     }
 }

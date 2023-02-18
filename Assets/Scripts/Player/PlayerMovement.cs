@@ -31,7 +31,10 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private Vector2 groundCheckSize = new Vector2(0.5f, 0.03f);
     [SerializeField] private LayerMask groundLayer;
+
+    [SerializeField] private Animator animator;
     private void Awake() {
+
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -195,5 +198,11 @@ public class PlayerMovement : MonoBehaviour {
 
             IsFacingRight = !IsFacingRight;
         }
+    }
+    private IEnumerator Dash() {
+        yield return new WaitForSeconds(1);
+    }
+    public void PlayerDeath() {
+
     }
 }
