@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMeleeAttack : MonoBehaviour
 {
-    private SpriteRenderer _sp;
+    [SerializeField] private SpriteRenderer _sp;
     private Animator _anim;
     private bool startCoolDown;
     private float coolDown;
@@ -12,7 +12,6 @@ public class PlayerMeleeAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _sp = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
         coolDown = 50;
     }
